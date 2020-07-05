@@ -1,0 +1,103 @@
+pages:
+  home:
+     home: 0.45
+     product_a: 0.17
+     product_b: 0.12
+     session_end: 0.26
+
+  product_a:
+     product_a: 0.5
+     home: 0.18
+     cart: 0.12
+     session_end: 0.2
+
+  product_b:
+     product_b: 0.4
+     home: 0.22
+     cart: 0.14
+     session_end: 0.24
+
+  cart:
+     cart: 0.25
+     payment: 0.5
+     home: 0.15
+     session_end: 0.1
+
+  payment:
+     payment: 0.45
+     confirmation: 0.4
+     cart: 0.1
+     session_end: 0.05
+
+  confirmation:
+     confirmation: 0.4
+     session_end: 0.6
+
+landing_pages:
+  home: 0.6
+  product_a: 0.25
+  product_b: 0.15
+
+visits_per_hour:
+  0: 0.0273
+  1: 0.0185
+  2: 0.0108
+  3: 0.0106
+  4: 0.0050
+  5: 0.0105
+  6: 0.0192
+  7: 0.0297
+  8: 0.0382
+  9: 0.0426
+  10: 0.0549
+  11: 0.0583
+  12: 0.0647
+  13: 0.0627
+  14: 0.0572
+  15: 0.0521
+  16: 0.0590
+  17: 0.0667
+  18: 0.0718
+  19: 0.0662
+  20: 0.0696
+  21: 0.0428
+  22: 0.0329
+  23: 0.0287
+
+operating_systems:
+  Windows: 0.1
+  MacOS: 0.15
+  Linux: 0.05
+  Android: 0.3
+  iOS: 0.4
+
+marketing_sources:
+  google: 0.15
+  facebook: 0.3
+  bing: 0.05
+  instagram: 0.2
+  mailchimp: 0.3
+
+ads:
+  ad_1: 0.05
+  ad_2: 0.3
+  ad_3: 0.2
+  ad_4: 0.25
+  ad_5: 0.2
+
+campaigns:
+  campaign_1: 0.8
+  campaign_2: 0.2
+
+marketing_mediums:
+  cpc: 0.25
+  affiliate: 0.1
+  organic: 0.4
+  social: 0.25
+
+browsers:
+  Chrome: 0.5
+  Firefox: 0.25
+  InternetExplorer: 0.05
+  Safari: 0.1
+  Opera: 0.1
