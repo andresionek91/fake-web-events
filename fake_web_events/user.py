@@ -1,6 +1,6 @@
 from faker import Faker
 import json
-from fake_web_events import utils
+from fake_web_events import select_random
 import uuid
 import random
 
@@ -13,14 +13,14 @@ class User(Faker):
     def __init__(self):
         super().__init__(['en_US'])
         self.lat, self.lng, self.region, self.country, self.timezone = self.location_on_land()
-        self.os_name = utils.select_random('operating_systems')
-        self.browser_name = utils.select_random('browsers')
+        self.os_name = select_random('operating_systems')
+        self.browser_name = select_random('browsers')
         self.device_is_mobile = False
         self.device_type = 'Computer'
-        self.ad = utils.select_random('ads')
-        self.campaign = utils.select_random('campaigns')
-        self.marketing_medium = utils.select_random('marketing_mediums')
-        self.referer_name = utils.select_random('marketing_sources')
+        self.ad = select_random('ads')
+        self.campaign = select_random('campaigns')
+        self.marketing_medium = select_random('marketing_mediums')
+        self.referer_name = select_random('marketing_sources')
         self.referer_medium = 'search' if self.referer_name in ['google', 'bing'] else 'internal'
         self.referer_url = f'www.{self.referer_name}.com'
 

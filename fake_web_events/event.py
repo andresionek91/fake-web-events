@@ -1,4 +1,4 @@
-from fake_web_events import utils
+from fake_web_events import select_random, get_pages_weights
 import json
 import random
 from datetime import timedelta
@@ -9,11 +9,9 @@ class Event:
     Creates events and keeps tracks of sessions
     """
 
-    config = utils.load_config()
-
     def __init__(self, current_timestamp, user, batch_size):
         self.previous_page = None
-        self.current_page = utils.select_random('landing_pages')
+        self.current_page = select_random('landing_pages')
         self.user = user.asdict()
         self.batch_size = batch_size
         self.current_timestamp = self.randomize_timestamp(current_timestamp)
@@ -31,8 +29,7 @@ class Event:
         """
         Calculate which one should be the next page
         """
-        pages = [page for page in self.config['pages'].get(self.current_page).keys()]
-        weights = self.config['pages'].get(self.current_page).values()
+        pages, weights = get_pages_weights(self.current_page)
         self.current_page = random.choices(pages, weights=weights)[0]
 
     def asdict(self):

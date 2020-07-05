@@ -1,8 +1,8 @@
-from fake_web_events import utils
+from fake_web_events import __init__
 import pytest
 
 
-config = utils.load_config()
+config = __init__.load_config()
 
 
 class SumNotOneException(Exception):

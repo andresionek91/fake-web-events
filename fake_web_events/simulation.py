@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
 from random import randrange, choices
 from fake_web_events.event import Event
-from fake_web_events.utils import load_config
+from fake_web_events.__init__ import load_config
 
 
 class Simulation:
@@ -88,12 +88,12 @@ class Simulation:
                 self.cur_sessions.remove(session)
 
 
-def simulate_events(simulation, duration):
+def simulate_events(simulation, duration_hours):
     """
     Function to run a simulation for the given duration in hours. Yields events.
     """
 
-    while simulation.get_duration() < timedelta(hours=duration):
+    while simulation.get_duration() < timedelta(hours=duration_hours):
         simulation.update_all_sessions()
         simulation.create_sessions()
         simulation.wait()
