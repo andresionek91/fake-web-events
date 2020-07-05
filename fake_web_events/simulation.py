@@ -91,7 +91,7 @@ class Simulation:
 
 def simulate_events(simulation, duration_seconds):
     """
-    Function to run a simulation for the given duration in hours. Yields events.
+    Function to run a simulation for the given duration in seconds. Yields events.
     """
     start = time()
     while time() - start < duration_seconds:
