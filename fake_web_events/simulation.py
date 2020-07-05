@@ -10,12 +10,13 @@ class Simulation:
     """
     config = load_config()
 
-    def __init__(self):
+    def __init__(self, user_pool, sessions_per_day=10000, batch_size=10, init_time=datetime.now()):
+        self.user_pool = user_pool
         self.cur_sessions = []
-        self.init_time = datetime.now()
-        self.cur_time = datetime.now()
-        self.batch_size = self.config['simulation']['batch_size']
-        self.max_sessions = self.config['simulation']['max_sessions']
+        self.init_time = init_time
+        self.cur_time = init_time
+        self.batch_size = batch_size
+        self.sessions_per_day = sessions_per_day
         self.qty_events = 0
 
     def __str__(self):
@@ -62,7 +63,7 @@ class Simulation:
         Calculate rate of events per step
         """
         hourly_rate = self.config['visits_per_hour'][self.cur_time.hour]
-        return hourly_rate * self.max_sessions / self.get_steps_per_hour()
+        return hourly_rate * self.sessions_per_day / self.get_steps_per_hour()
 
     def wait(self):
         """
@@ -78,7 +79,7 @@ class Simulation:
         n_users = int(rate)
         n_users += choices([1, 0], cum_weights=[(rate % 1), 1])[0]
         for n in range(n_users):
-            self.cur_sessions.append(Event(self.cur_time))
+            self.cur_sessions.append(Event(self.cur_time, self.user_pool.get_user(), self.batch_size))
 
     def update_all_sessions(self):
         for session in list(self.cur_sessions):

@@ -1,4 +1,3 @@
-from fake_web_events.user import User
 from fake_web_events import utils
 import json
 import random
@@ -12,11 +11,11 @@ class Event:
 
     config = utils.load_config()
 
-    def __init__(self, current_timestamp):
+    def __init__(self, current_timestamp, user, batch_size):
         self.previous_page = None
         self.current_page = utils.select_random('landing_pages')
-        self.user = User().asdict()
-        self.batch_size = self.config['simulation']['batch_size']
+        self.user = user.asdict()
+        self.batch_size = batch_size
         self.current_timestamp = self.randomize_timestamp(current_timestamp)
         self.is_new_page = True
 

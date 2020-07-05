@@ -2,6 +2,7 @@ from faker import Faker
 import json
 from fake_web_events import utils
 import uuid
+import random
 
 
 class User(Faker):
@@ -143,3 +144,18 @@ class User(Faker):
         Human readable attributes
         """
         return json.dumps(self.asdict(), indent=4, ensure_ascii=False)
+
+
+class UserPool:
+
+    def __init__(self, size):
+        self.pool = [User()] * size
+
+    def __repr__(self):
+        return repr(self.pool)
+
+    def get_user(self):
+        """
+        Get a random user with reposition
+        """
+        return random.choices(self.pool)[0]
