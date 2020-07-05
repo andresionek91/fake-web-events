@@ -66,7 +66,7 @@ for event in events:
 We create fake users, then generate session events based on a set of probabilities.
 
 ### Probabilities
-There is a configuration file where we define a set of probabilities for each event. Let"s say browser preference:
+There is a configuration file where we define a set of probabilities for each event. Let's say browser preference:
 ```yaml
 browsers:
   Chrome: 0.5
@@ -85,8 +85,8 @@ home:
   product_b: 0.12
   session_end: 0.26
 ```
-This means that at the next iteration, there are 45% chance user stays at home, 
-17% user goes to product_a page and so on.
+This means that at the next iteration there are 45% chance user stays at home page, 
+17% chance user goes to product_a page and so on.
 
 ### Website Map
 We designed a really simple website map to allow user browsing.
