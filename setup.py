@@ -8,7 +8,7 @@ with open(path.join(this_directory, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name='fake_web_events',
-    version='0.1.1',
+    version='0.1.2',
     description='Generator of semi-random fake web events. ',
     long_description=long_description,
     long_description_content_type='text/markdown',
@@ -19,6 +19,7 @@ setup(
     url="https://github.com/andresionek91/fake-web-events",
     packages=['fake_web_events'],
     install_requires=['pyaml==20.4.0', 'pytest==5.4.3', 'faker==4.1.1'],
+    include_package_data=True,
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',
