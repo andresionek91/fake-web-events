@@ -123,3 +123,19 @@ directory where you are running the script. This file will take precedence over 
 
 # Examples
 In the folder [examples](examples) you are going to find some use cases and examples on how to use this package.
+
+## Page visit distribution
+After running the simulation for a few seconds, we get the following distribution of events per page:
+```
+page             count
+/home            20202
+/product_a       11503
+/product_b        7571
+/cart             5054
+/payment          3364
+/confirmation     2481
+```
+
+## Sessions per hour
+We also have different visit rates per hour of day. This is the distribution after running the simulation:
+![events_per_hour](assets/events_per_hour.png)
