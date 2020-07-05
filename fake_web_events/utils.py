@@ -5,18 +5,17 @@ import sys
 
 
 def _get_abs_path(path):
-    __location__ = sys.path[0]
+    __location__ = os.path.dirname(os.path.realpath(__file__))
     return os.path.join(__location__, path)
 
 
 def load_config():
     try:
-        with open(_get_abs_path('config.yml'), 'r') as f:
+        with open(os.path.join(sys.path[0], 'config.yml'), 'r') as f:
             return yaml.safe_load(f)
-    except FileNotFoundError as e:
-        raise FileNotFoundError(e, 'Could not find a config.yml in the same '
-                                'directory as the script that runs the simulation. '
-                                'Please create a config file following the template.')
+    except FileNotFoundError:
+        with open(_get_abs_path('config.template.yml'), 'r') as f:
+            return yaml.safe_load(f)
 
 
 config = load_config()
