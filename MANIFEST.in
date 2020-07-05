@@ -1,0 +1,2 @@
+include README.rst
+include fake_web_events/config.template.yml
