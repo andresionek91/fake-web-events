@@ -1,6 +1,7 @@
 from datetime import datetime, timedelta
 from random import randrange, choices
 from fake_web_events.event import Event
+from fake_web_events.user import UserPool
 from fake_web_events.__init__ import load_config
 from time import time
 
@@ -11,8 +12,8 @@ class Simulation:
     """
     config = load_config()
 
-    def __init__(self, user_pool, sessions_per_day=10000, batch_size=10, init_time=datetime.now()):
-        self.user_pool = user_pool
+    def __init__(self, user_pool_size, sessions_per_day=10000, batch_size=10, init_time=datetime.now()):
+        self.user_pool = UserPool(size=user_pool_size)
         self.cur_sessions = []
         self.init_time = init_time
         self.cur_time = init_time
@@ -88,16 +89,15 @@ class Simulation:
             if not session.is_active():
                 self.cur_sessions.remove(session)
 
-
-def simulate_events(simulation, duration_seconds):
-    """
-    Function to run a simulation for the given duration in seconds. Yields events.
-    """
-    start = time()
-    while time() - start < duration_seconds:
-        simulation.update_all_sessions()
-        simulation.create_sessions()
-        simulation.wait()
-        for session in simulation.cur_sessions:
-            if session.is_new_page:
-                yield session.asdict()
+    def run(self, duration_seconds):
+        """
+        Function to run a simulation for the given duration in seconds. Yields events.
+        """
+        start = time()
+        while time() - start < duration_seconds:
+            self.update_all_sessions()
+            self.create_sessions()
+            self.wait()
+            for session in self.cur_sessions:
+                if session.is_new_page:
+                    yield session.asdict()

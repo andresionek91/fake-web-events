@@ -49,14 +49,11 @@ To install simply do `pip install fake_web_events`
 ## Running
 It is easy to run a simulation as well:
 ```python
-from fake_web_events.user import UserPool
-from fake_web_events.simulation import Simulation, simulate_events
+from fake_web_events.simulation import Simulation
 
 
-user_pool = UserPool(size=200)
-simulation = Simulation(user_pool=user_pool, sessions_per_day=100000)
-events = simulate_events(simulation, duration_seconds=60)
-
+simulation = Simulation(user_pool_size=10000, sessions_per_day=100000)
+events = simulation.run(duration_seconds=60)
 
 for event in events:
     print(event)
