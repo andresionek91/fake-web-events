@@ -133,7 +133,7 @@ page             count
 /confirmation     2481
 ```
 
-## Sessions per hour
+## Page views per hour
 We also have different visit rates per hour of day. This is the distribution after running the simulation:
 ![events_per_hour](assets/events_per_hour.png)
 
