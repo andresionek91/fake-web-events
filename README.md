@@ -138,4 +138,4 @@ We also have different visit rates per hour of day. This is the distribution aft
 ![events_per_hour](assets/events_per_hour.png)
 
 # Wanna help?
-Fork, improve and PR.
+Fork, improve and PR. 
