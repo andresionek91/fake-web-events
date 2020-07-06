@@ -19,8 +19,8 @@ class User(Faker):
         self.device_type = 'Computer'
         self.ad = select_random('ads')
         self.campaign = select_random('campaigns')
-        self.marketing_medium = select_random('marketing_mediums')
-        self.referer_name = select_random('marketing_sources')
+        self.utm_medium = select_random('marketing_mediums')
+        self.referer_name = select_random('utm_sources')
         self.referer_medium = 'search' if self.referer_name in ['google', 'bing'] else 'internal'
         self.referer_url = f'www.{self.referer_name}.com'
 
@@ -117,11 +117,11 @@ class User(Faker):
         Build dictionary with marketing attributes
         """
         return dict(
-            marketing_medium=self.marketing_medium,
-            marketing_source=self.referer_name,
-            marketing_content=self.ad,
-            marketing_campaign=self.campaign,
-            marketing_click_id=str(uuid.uuid4()),
+            utm_medium=self.utm_medium,
+            utm_source=self.referer_name,
+            utm_content=self.ad,
+            utm_campaign=self.campaign,
+            click_id=str(uuid.uuid4()),
             )
 
     def asdict(self):
