@@ -149,7 +149,13 @@ class User(Faker):
 class UserPool:
 
     def __init__(self, size):
-        self.pool = [User()] * size
+        self.size = size
+        self.pool = []
+        self.populate_pool()
+
+    def populate_pool(self):
+        for idx in range(self.size):
+            self.pool.append(User())
 
     def __repr__(self):
         return repr(self.pool)
