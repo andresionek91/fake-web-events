@@ -71,7 +71,7 @@ operating_systems:
   Android: 0.3
   iOS: 0.4
 
-marketing_sources:
+utm_sources:
   google: 0.15
   facebook: 0.3
   bing: 0.05
@@ -89,7 +89,7 @@ campaigns:
   campaign_1: 0.8
   campaign_2: 0.2
 
-marketing_mediums:
+utm_mediums:
   cpc: 0.25
   affiliate: 0.1
   organic: 0.4
