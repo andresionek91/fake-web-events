@@ -88,4 +88,3 @@ class TestUserPool:
     def test_pool_size_after_getting_user(self, mock_user_pool):
         mock_user_pool.get_user()
         assert len(mock_user_pool.pool) == 10
-
