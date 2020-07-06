@@ -1,7 +1,6 @@
 from faker import Faker
 import json
 from fake_web_events.utils import WeightedRandom
-import uuid
 import random
 import logging
 
@@ -99,7 +98,7 @@ class User(Faker, WeightedRandom):
         """
         return dict(
             user_custom_id=self.ascii_free_email(),
-            user_domain_id=str(uuid.uuid4())
+            user_domain_id=str(self.uuid4())
         )
 
     def referer(self) -> dict:
@@ -113,7 +112,7 @@ class User(Faker, WeightedRandom):
             referer_medium=self.referer_medium,
         )
 
-    def marketing(self) -> dict:
+    def utm(self) -> dict:
         """
         Build dictionary with marketing attributes
         """
@@ -122,7 +121,7 @@ class User(Faker, WeightedRandom):
             utm_source=self.referer_name,
             utm_content=self.ad,
             utm_campaign=self.campaign,
-            click_id=str(uuid.uuid4()),
+            click_id=str(self.uuid4()),
             )
 
     def asdict(self) -> dict:
@@ -131,7 +130,7 @@ class User(Faker, WeightedRandom):
         """
         return {
             **self.referer(),
-            **self.marketing(),
+            **self.utm(),
             **self.geo(),
             **self.ip(),
             **self.browser(),
