@@ -1,4 +1,2 @@
 pyaml==20.4.0
-pytest==5.4.3
 faker==4.1.1
-mock==4.0.2

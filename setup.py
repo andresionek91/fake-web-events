@@ -17,7 +17,7 @@ setup(
     author_email='andresionek91@gmail.com',
     url="https://github.com/andresionek91/fake-web-events",
     packages=['fake_web_events'],
-    install_requires=['pyaml==20.4.0', 'pytest==5.4.3', 'faker==4.1.1'],
+    install_requires=['pyaml==20.4.0', 'faker==4.1.1'],
     include_package_data=True,
     classifiers=[
         'Development Status :: 3 - Alpha',
