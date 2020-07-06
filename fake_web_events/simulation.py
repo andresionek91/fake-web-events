@@ -5,6 +5,8 @@ from fake_web_events.user import UserPool
 from fake_web_events.__init__ import load_config
 from time import time
 
+from typing import Generator
+
 
 class Simulation:
     """
@@ -21,7 +23,7 @@ class Simulation:
         self.sessions_per_day = sessions_per_day
         self.qty_events = 0
 
-    def __str__(self):
+    def __str__(self) -> str:
         """
         Return human readable state
         """
@@ -31,19 +33,19 @@ class Simulation:
                f"Current user rate: {self.get_rate_per_step()}\n" \
                f"Quantity of events: {self.qty_events}"
 
-    def get_len_sessions(self):
+    def get_len_sessions(self) -> int:
         """
         Calculate amount of current active sessions
         """
         return len(self.cur_sessions)
 
-    def get_duration(self):
+    def get_duration(self) -> timedelta:
         """
         Get duration of simulation
         """
         return self.cur_time - self.init_time
 
-    def get_duration_str(self):
+    def get_duration_str(self) -> str:
         """
         Get simulation duration as a string
         """
@@ -54,26 +56,26 @@ class Simulation:
         seconds = duration_td.seconds % 60
         return f'{days} days, {hours} hours, {minutes} minutes, {seconds} seconds'
 
-    def get_steps_per_hour(self):
+    def get_steps_per_hour(self) -> float:
         """
         Calculate how many steps are there in one hour
         """
         return 3600 / self.batch_size
 
-    def get_rate_per_step(self):
+    def get_rate_per_step(self) -> float:
         """
         Calculate rate of events per step
         """
         hourly_rate = self.config['visits_per_hour'][self.cur_time.hour]
         return hourly_rate * self.sessions_per_day / self.get_steps_per_hour()
 
-    def wait(self):
+    def wait(self) -> None:
         """
         Wait for given amount of time defined in batch size
         """
         self.cur_time += timedelta(seconds=self.batch_size + randrange(-self.batch_size * 0.3, self.batch_size * 0.3))
 
-    def create_sessions(self):
+    def create_sessions(self) -> None:
         """
         Create a new session for a new user
         """
@@ -83,13 +85,13 @@ class Simulation:
         for n in range(n_users):
             self.cur_sessions.append(Event(self.cur_time, self.user_pool.get_user(), self.batch_size))
 
-    def update_all_sessions(self):
+    def update_all_sessions(self) -> None:
         for session in list(self.cur_sessions):
             session.update(self.cur_time)
             if not session.is_active():
                 self.cur_sessions.remove(session)
 
-    def run(self, duration_seconds):
+    def run(self, duration_seconds: int) -> Generator[dict, None, None]:
         """
         Function to run a simulation for the given duration in seconds. Yields events.
         """

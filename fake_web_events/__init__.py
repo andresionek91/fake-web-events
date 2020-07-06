@@ -4,13 +4,15 @@ import random
 import sys
 import logging
 
+from typing import Tuple, List
 
-def _get_abs_path(path):
+
+def _get_abs_path(path: str) -> str:
     __location__ = os.path.dirname(os.path.realpath(__file__))
     return os.path.join(__location__, path)
 
 
-def load_config():
+def load_config() -> dict:
     """
     Load config file. If not found, then load the template
     """
@@ -26,7 +28,7 @@ def load_config():
 config = load_config()
 
 
-def select_random(property_name: str):
+def select_random(property_name: str) -> str:
     """
     Select a weighted random value from a property defined in config file
     :param property_name: a property name defined in config file
@@ -37,9 +39,9 @@ def select_random(property_name: str):
     return random.choices(keys, weights=weights)[0]
 
 
-def get_pages_weights(page):
+def get_pages_weights(page: str) -> Tuple[List[str], List[float]]:
     """
-    Returns list of pages from config
+    Returns list of pages and weights from config
     """
     pages = [page for page in config['pages'].get(page).keys()]
     weights = list(config['pages'].get(page).values())

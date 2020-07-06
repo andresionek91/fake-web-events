@@ -24,7 +24,7 @@ class User(Faker):
         self.referer_medium = 'search' if self.referer_name in ['google', 'bing'] else 'internal'
         self.referer_url = f'www.{self.referer_name}.com'
 
-    def geo(self):
+    def geo(self) -> dict:
         """
         Build dictionary with geo attributes
         """
@@ -36,7 +36,7 @@ class User(Faker):
             geo_region_name=self.region
         )
 
-    def ip(self):
+    def ip(self) -> dict:
         """
         Build dictionary with ip attributes
         """
@@ -44,7 +44,7 @@ class User(Faker):
             ip_address=self.ipv4_public(),
         )
 
-    def browser(self):
+    def browser(self) -> dict:
         """
         Build dictionary with browser attributes
         """
@@ -61,7 +61,7 @@ class User(Faker):
             browser_language=self.locale(),
         )
 
-    def operating_system(self):
+    def operating_system(self) -> dict:
         """
         Build dictionary with operating_system attributes
         """
@@ -79,7 +79,7 @@ class User(Faker):
             os_timezone=self.timezone
         )
 
-    def device(self):
+    def device(self) -> dict:
         """
         Build dictionary with device type attributes
         """
@@ -92,7 +92,7 @@ class User(Faker):
             device_is_mobile=self.device_is_mobile
         )
 
-    def user(self):
+    def user(self) -> dict:
         """
         Build dictionary with user attributes
         """
@@ -101,7 +101,7 @@ class User(Faker):
             user_domain_id=str(uuid.uuid4())
         )
 
-    def referer(self):
+    def referer(self) -> dict:
         """
         Build dictionary with referer type attributes
         """
@@ -112,7 +112,7 @@ class User(Faker):
             referer_medium=self.referer_medium,
         )
 
-    def marketing(self):
+    def marketing(self) -> dict:
         """
         Build dictionary with marketing attributes
         """
@@ -124,7 +124,7 @@ class User(Faker):
             click_id=str(uuid.uuid4()),
             )
 
-    def asdict(self):
+    def asdict(self) -> dict:
         """
         Return dict with all user attributes
         """
@@ -139,7 +139,7 @@ class User(Faker):
             **self.user()
         }
 
-    def __str__(self):
+    def __str__(self) -> str:
         """
         Human readable attributes
         """
@@ -148,7 +148,7 @@ class User(Faker):
 
 class UserPool:
 
-    def __init__(self, size):
+    def __init__(self, size: int):
         self.size = size
         self.pool = []
         self.populate_pool()
@@ -157,10 +157,10 @@ class UserPool:
         for idx in range(self.size):
             self.pool.append(User())
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return repr(self.pool)
 
-    def get_user(self):
+    def get_user(self) -> User:
         """
         Get a random user with reposition
         """

@@ -31,9 +31,10 @@ class TestConfig:
         if page_sum != 1:
             raise SumNotOneException(page, page_sum)
 
-    @pytest.mark.parametrize("parameter", ['visits_per_hour', 'operating_systems', 'marketing_sources', 'ads',
-                                           'campaigns', 'marketing_mediums', 'browsers', 'landing_pages'])
+    @pytest.mark.parametrize("parameter", ['landing_pages', 'visits_per_hour', 'operating_systems', 'utm_sources', 'ads',
+                                           'campaigns', 'utm_mediums', 'browsers'])
     def test_sum_others(self, parameter):
         sum_parameter = sum(config[parameter].values())
         if sum_parameter != 1:
             raise SumNotOneException(parameter, sum_parameter)
+

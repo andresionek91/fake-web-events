@@ -1,7 +1,8 @@
 from fake_web_events import select_random, get_pages_weights
+from fake_web_events.user import User
 import json
 import random
-from datetime import timedelta
+from datetime import timedelta, datetime
 
 
 class Event:
@@ -9,7 +10,7 @@ class Event:
     Creates events and keeps tracks of sessions
     """
 
-    def __init__(self, current_timestamp, user, batch_size):
+    def __init__(self, current_timestamp: datetime, user: User, batch_size: int):
         self.previous_page = None
         self.current_page = select_random('landing_pages')
         self.user = user.asdict()
@@ -17,7 +18,7 @@ class Event:
         self.current_timestamp = self.randomize_timestamp(current_timestamp)
         self.is_new_page = True
 
-    def randomize_timestamp(self, timestamp):
+    def randomize_timestamp(self, timestamp: datetime) -> datetime:
         """
         Randomize timestamps so not all events come with the same timestamp value
         """
@@ -25,14 +26,14 @@ class Event:
         random_interval = random.randrange(-range_milliseconds, range_milliseconds)
         return timestamp + timedelta(milliseconds=random_interval)
 
-    def get_next_page(self):
+    def get_next_page(self) -> None:
         """
         Calculate which one should be the next page
         """
         pages, weights = get_pages_weights(self.current_page)
         self.current_page = random.choices(pages, weights=weights)[0]
 
-    def asdict(self):
+    def asdict(self) -> dict:
         """
         Return the event as a dictionary
         """
@@ -44,13 +45,13 @@ class Event:
             **self.user
         }
 
-    def is_active(self):
+    def is_active(self) -> bool:
         """
         Check if session is currently active
         """
         return self.current_page != 'session_end'
 
-    def update(self, timestamp):
+    def update(self, timestamp: datetime) -> None:
         """
         Update state / Change pages
         """
@@ -60,7 +61,7 @@ class Event:
             self.get_next_page()
             self.is_new_page = self.current_page != self.previous_page
 
-    def __str__(self):
+    def __str__(self) -> str:
         """
         Human readable event
         """
