@@ -21,7 +21,7 @@ class SumNotOneException(Exception):
 
 def _sum_pages():
     for page in config['pages']:
-        yield page, sum(config['pages'][page].values())
+        yield page, round(sum(config['pages'][page].values()), 8)
 
 
 class TestConfig:
@@ -34,7 +34,6 @@ class TestConfig:
     @pytest.mark.parametrize("parameter", ['landing_pages', 'visits_per_hour', 'operating_systems', 'utm_sources', 'ads',
                                            'campaigns', 'utm_mediums', 'browsers'])
     def test_sum_others(self, parameter):
-        sum_parameter = sum(config[parameter].values())
+        sum_parameter = round(sum(config[parameter].values()), 8)
         if sum_parameter != 1:
             raise SumNotOneException(parameter, sum_parameter)
-
