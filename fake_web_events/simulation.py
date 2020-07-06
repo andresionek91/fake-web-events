@@ -20,6 +20,7 @@ class Simulation:
             sessions_per_day: int = 10000,
             batch_size: int = 10,
             init_time: datetime = datetime.now()):
+
         self.user_pool = UserPool(size=user_pool_size)
         self.cur_sessions = []
         self.init_time = init_time
@@ -81,7 +82,7 @@ class Simulation:
         """
         self.cur_time += timedelta(seconds=self.batch_size + randrange(-self.batch_size * 0.3, self.batch_size * 0.3))
 
-    def create_sessions(self) -> None:
+    def create_sessions(self) -> list:
         """
         Create a new session for a new user
         """
@@ -89,6 +90,8 @@ class Simulation:
         n_users += choices([1, 0], cum_weights=[(self.rate % 1), 1])[0]
         for n in range(n_users):
             self.cur_sessions.append(Event(self.cur_time, self.user_pool.get_user(), self.batch_size))
+
+        return self.cur_sessions
 
     def update_all_sessions(self) -> None:
         for session in list(self.cur_sessions):
