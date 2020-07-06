@@ -19,7 +19,7 @@ class User(Faker):
         self.device_type = 'Computer'
         self.ad = select_random('ads')
         self.campaign = select_random('campaigns')
-        self.utm_medium = select_random('marketing_mediums')
+        self.utm_medium = select_random('utm_mediums')
         self.referer_name = select_random('utm_sources')
         self.referer_medium = 'search' if self.referer_name in ['google', 'bing'] else 'internal'
         self.referer_url = f'www.{self.referer_name}.com'
