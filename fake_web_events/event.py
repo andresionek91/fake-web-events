@@ -26,22 +26,32 @@ class Event(WeightedRandom):
         random_interval = random.randrange(-range_milliseconds, range_milliseconds)
         return timestamp + timedelta(milliseconds=random_interval)
 
-    def get_next_page(self) -> None:
+    def get_next_page(self) -> str:
         """
         Calculate which one should be the next page
         """
         pages, weights = self.get_pages(self.current_page)
         self.current_page = random.choices(pages, weights=weights)[0]
 
-    def asdict(self) -> dict:
+        return self.current_page
+
+    def pageview(self) -> dict:
         """
-        Return the event as a dictionary
+        Return the event information as a dictionary
         """
         return {
             'event_timestamp': self.current_timestamp.strftime('%Y-%m-%d %H:%M:%S.%f'),
             'event_type': 'pageview',
             'page_url': f'http://www.dummywebsite.com/{self.current_page}',
             'page_url_path': f'/{self.current_page}',
+        }
+
+    def asdict(self) -> dict:
+        """
+        Return the event + user as a dictionary
+        """
+        return {
+            **self.pageview(),
             **self.user
         }
 
@@ -51,7 +61,7 @@ class Event(WeightedRandom):
         """
         return self.current_page != 'session_end'
 
-    def update(self, timestamp: datetime) -> None:
+    def update(self, timestamp: datetime) -> bool:
         """
         Update state / Change pages
         """
@@ -60,6 +70,8 @@ class Event(WeightedRandom):
             self.previous_page = self.current_page
             self.get_next_page()
             self.is_new_page = self.current_page != self.previous_page
+
+            return self.is_new_page
 
     def __str__(self) -> str:
         """
