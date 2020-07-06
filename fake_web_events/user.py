@@ -1,11 +1,12 @@
 from faker import Faker
 import json
-from fake_web_events import select_random
+from fake_web_events.utils import WeightedRandom
 import uuid
 import random
+import logging
 
 
-class User(Faker):
+class User(Faker, WeightedRandom):
     """
     Class that will create fake event attributes associated to a user
     """
@@ -13,14 +14,14 @@ class User(Faker):
     def __init__(self):
         super().__init__(['en_US'])
         self.lat, self.lng, self.region, self.country, self.timezone = self.location_on_land()
-        self.os_name = select_random('operating_systems')
-        self.browser_name = select_random('browsers')
+        self.os_name = self.select('operating_systems')
+        self.browser_name = self.select('browsers')
         self.device_is_mobile = False
         self.device_type = 'Computer'
-        self.ad = select_random('ads')
-        self.campaign = select_random('campaigns')
-        self.utm_medium = select_random('utm_mediums')
-        self.referer_name = select_random('utm_sources')
+        self.ad = self.select('ads')
+        self.campaign = self.select('campaigns')
+        self.utm_medium = self.select('utm_mediums')
+        self.referer_name = self.select('utm_sources')
         self.referer_medium = 'search' if self.referer_name in ['google', 'bing'] else 'internal'
         self.referer_url = f'www.{self.referer_name}.com'
 
@@ -154,7 +155,10 @@ class UserPool:
         self.populate_pool()
 
     def populate_pool(self):
+        logging.info('Creating UserPool. This might take a while depending on your pool size.')
         for idx in range(self.size):
+            if idx % 100 == 0:
+                logging.info(f'{idx} users created.')
             self.pool.append(User())
 
     def __repr__(self) -> str:

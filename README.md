@@ -49,7 +49,7 @@ To install simply do `pip install fake_web_events`
 ## Running
 It is easy to run a simulation as well:
 ```python
-from fake_web_events.simulation import Simulation
+from fake_web_events import Simulation
 
 
 simulation = Simulation(user_pool_size=10000, sessions_per_day=100000)

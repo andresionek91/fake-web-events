@@ -1,11 +1,11 @@
-from fake_web_events.simulation import Simulation
+from fake_web_events import Simulation
 import json
 import pandas as pd
 import matplotlib.pyplot as plt
 
 
 def create_events_file():
-    simulation = Simulation(user_pool_size=10000, sessions_per_day=100000)
+    simulation = Simulation(user_pool_size=100, sessions_per_day=10000)
     events = simulation.run(duration_seconds=60)
 
     with open('events.json', 'w') as f:

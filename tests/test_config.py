@@ -1,4 +1,4 @@
-from fake_web_events import load_config
+from fake_web_events.utils import load_config
 import pytest
 
 

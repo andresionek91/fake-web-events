@@ -2,7 +2,7 @@ from datetime import datetime, timedelta
 from random import randrange, choices
 from fake_web_events.event import Event
 from fake_web_events.user import UserPool
-from fake_web_events.__init__ import load_config
+from fake_web_events.utils import load_config
 from time import time
 
 from typing import Generator
@@ -14,7 +14,12 @@ class Simulation:
     """
     config = load_config()
 
-    def __init__(self, user_pool_size, sessions_per_day=10000, batch_size=10, init_time=datetime.now()):
+    def __init__(
+            self,
+            user_pool_size: int,
+            sessions_per_day: int = 10000,
+            batch_size: int = 10,
+            init_time: datetime = datetime.now()):
         self.user_pool = UserPool(size=user_pool_size)
         self.cur_sessions = []
         self.init_time = init_time
@@ -22,6 +27,7 @@ class Simulation:
         self.batch_size = batch_size
         self.sessions_per_day = sessions_per_day
         self.qty_events = 0
+        self.rate = self.get_rate_per_step()
 
     def __str__(self) -> str:
         """
@@ -30,7 +36,7 @@ class Simulation:
         return "\nSIMULATION STATE\n" \
                f"Current Sessions: {self.get_len_sessions()}\n" \
                f"Current duration: {self.get_duration_str()}\n" \
-               f"Current user rate: {self.get_rate_per_step()}\n" \
+               f"Current user rate: {self.rate}\n" \
                f"Quantity of events: {self.qty_events}"
 
     def get_len_sessions(self) -> int:
@@ -79,9 +85,8 @@ class Simulation:
         """
         Create a new session for a new user
         """
-        rate = self.get_rate_per_step()
-        n_users = int(rate)
-        n_users += choices([1, 0], cum_weights=[(rate % 1), 1])[0]
+        n_users = int(self.rate)
+        n_users += choices([1, 0], cum_weights=[(self.rate % 1), 1])[0]
         for n in range(n_users):
             self.cur_sessions.append(Event(self.cur_time, self.user_pool.get_user(), self.batch_size))
 

@@ -1,18 +1,18 @@
-from fake_web_events import select_random, get_pages_weights
+from fake_web_events.utils import WeightedRandom
 from fake_web_events.user import User
 import json
 import random
 from datetime import timedelta, datetime
 
 
-class Event:
+class Event(WeightedRandom):
     """
     Creates events and keeps tracks of sessions
     """
 
     def __init__(self, current_timestamp: datetime, user: User, batch_size: int):
         self.previous_page = None
-        self.current_page = select_random('landing_pages')
+        self.current_page = self.select('landing_pages')
         self.user = user.asdict()
         self.batch_size = batch_size
         self.current_timestamp = self.randomize_timestamp(current_timestamp)
@@ -30,7 +30,7 @@ class Event:
         """
         Calculate which one should be the next page
         """
-        pages, weights = get_pages_weights(self.current_page)
+        pages, weights = self.get_pages(self.current_page)
         self.current_page = random.choices(pages, weights=weights)[0]
 
     def asdict(self) -> dict:
