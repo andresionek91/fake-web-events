@@ -81,11 +81,13 @@ class Simulation:
         Wait for given amount of time defined in batch size
         """
         self.cur_time += timedelta(seconds=self.batch_size + randrange(-self.batch_size * 0.3, self.batch_size * 0.3))
+        self.rate = self.get_rate_per_step()
 
     def create_sessions(self) -> list:
         """
         Create a new session for a new user
         """
+        print(self.rate)
         n_users = int(self.rate)
         n_users += choices([1, 0], cum_weights=[(self.rate % 1), 1])[0]
         for n in range(n_users):
