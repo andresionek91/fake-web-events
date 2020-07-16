@@ -2,9 +2,12 @@ from fake_web_events import Simulation
 import os
 from sqlalchemy import create_engine
 from sqlalchemy import Table, Column, String, MetaData, TIMESTAMP, Integer, Float, Boolean
+import logging
 
 db_string = f"postgres://{os.environ['user']}:{os.environ['password']}@localhost:5432/{os.environ['dbname']}"
 db = create_engine(db_string)
+
+logging.getLogger().setLevel(logging.INFO)
 
 meta = MetaData(db)
 atomic_events_table = Table('atomic_events',
@@ -43,9 +46,8 @@ atomic_events_table = Table('atomic_events',
 with db.connect() as conn:
     atomic_events_table.create()
 
-
-    simulation = Simulation(user_pool_size=100, sessions_per_day=10000)
-    events = simulation.run(duration_seconds=1)
+    simulation = Simulation(user_pool_size=1000, sessions_per_day=10000)
+    events = simulation.run(duration_seconds=900)
 
     for event in events:
         insert_statement = atomic_events_table.insert().values(**event)
