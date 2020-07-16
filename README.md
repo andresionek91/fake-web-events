@@ -123,15 +123,8 @@ In the folder [examples](examples) you are going to find some use cases and exam
 
 ## Page visit distribution
 After running the simulation for a few seconds, we get the following distribution of events per page:
-```
-page             count
-/home            20202
-/product_a       11503
-/product_b        7571
-/cart             5054
-/payment          3364
-/confirmation     2481
-```
+![pageview_funnel](assets/pageview_funnel.png)
+
 
 ## Page views per hour
 We also have different visit rates per hour of day. This is the distribution after running the simulation:
