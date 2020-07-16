@@ -135,7 +135,7 @@ page             count
 
 ## Page views per hour
 We also have different visit rates per hour of day. This is the distribution after running the simulation:
-![events_per_hour](assets/events_per_hour.png)
+![events_per_hour](assets/pageviews.gif)
 
 # Wanna help?
 Fork, improve and PR.
