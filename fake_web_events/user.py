@@ -155,10 +155,10 @@ class UserPool:
 
     def populate_pool(self):
         logging.info('Creating UserPool. This might take a while depending on your pool size.')
-        for idx in range(self.size):
+        for idx in range(1, self.size + 1):
             if idx % 100 == 0:
                 logging.info(f'{idx} users created.')
-            self.pool.append(User())
+            self.pool.append(User().asdict())
 
     def __repr__(self) -> str:
         return repr(self.pool)

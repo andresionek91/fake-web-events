@@ -13,7 +13,7 @@ class Event(WeightedRandom):
     def __init__(self, current_timestamp: datetime, user: User, batch_size: int):
         self.previous_page = None
         self.current_page = self.select('landing_pages')
-        self.user = user.asdict()
+        self.user = user
         self.batch_size = batch_size
         self.current_timestamp = self.randomize_timestamp(current_timestamp)
         self.is_new_page = True

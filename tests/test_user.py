@@ -83,7 +83,7 @@ class TestUserPool:
         assert len(mock_user_pool.pool) == 10
 
     def test_get_user(self, mock_user_pool):
-        assert isinstance(mock_user_pool.get_user(), User)
+        assert isinstance(mock_user_pool.get_user(), dict)
 
     def test_pool_size_after_getting_user(self, mock_user_pool):
         mock_user_pool.get_user()

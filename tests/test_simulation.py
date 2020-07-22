@@ -52,3 +52,9 @@ class TestSimulation:
 
     def test_update(self, mock_simulation, mock_update):
         assert mock_simulation.get_len_sessions() == 4
+
+    def test_max_unique_user_ids(self, mock_simulation):
+        # after running the simulation for some time, the max unique user ids must be equal to the pool size
+        events = list(mock_simulation.run(2))
+        user_domain_ids = set(event['user_domain_id'] for event in events)
+        assert len(user_domain_ids) == 10
