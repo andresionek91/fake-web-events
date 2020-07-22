@@ -46,7 +46,7 @@ atomic_events_table = Table('atomic_events',
 with db.connect() as conn:
     atomic_events_table.create()
 
-    simulation = Simulation(user_pool_size=1000, sessions_per_day=10000)
+    simulation = Simulation(user_pool_size=100, sessions_per_day=10000)
     events = simulation.run(duration_seconds=900)
 
     for event in events:

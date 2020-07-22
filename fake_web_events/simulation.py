@@ -87,7 +87,6 @@ class Simulation:
         """
         Create a new session for a new user
         """
-        print(self.rate)
         n_users = int(self.rate)
         n_users += choices([1, 0], cum_weights=[(self.rate % 1), 1])[0]
         for n in range(n_users):
