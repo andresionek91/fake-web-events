@@ -1,3 +1,4 @@
+from faker import Faker
 from fake_web_events.utils import WeightedRandom
 from fake_web_events.user import User
 import json
@@ -5,12 +6,13 @@ import random
 from datetime import timedelta, datetime
 
 
-class Event(WeightedRandom):
+class Event(Faker, WeightedRandom):
     """
     Creates events and keeps tracks of sessions
     """
 
     def __init__(self, current_timestamp: datetime, user: User, batch_size: int):
+        super().__init__(['en_US'])
         self.previous_page = None
         self.current_page = self.select('landing_pages')
         self.user = user
@@ -40,6 +42,7 @@ class Event(WeightedRandom):
         Return the event information as a dictionary
         """
         return {
+            'event_id': self.uuid4(),
             'event_timestamp': self.current_timestamp.strftime('%Y-%m-%d %H:%M:%S.%f'),
             'event_type': 'pageview',
             'page_url': f'http://www.dummywebsite.com/{self.current_page}',
