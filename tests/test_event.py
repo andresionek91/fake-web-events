@@ -31,6 +31,7 @@ class TestEvent:
 
     def test_pageview(self, mock_event):
         assert mock_event.pageview() == {
+            'event_id': '0a5d2f34-6baa-4455-a3e7-0682c2094cac',
             'event_timestamp': '2020-07-06 23:59:59.484000',
             'event_type': 'pageview',
             'page_url': 'http://www.dummywebsite.com/product_a',
