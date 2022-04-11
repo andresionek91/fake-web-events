@@ -15,6 +15,7 @@ class User(Faker, WeightedRandom):
         self.lat, self.lng, self.region, self.country, self.timezone = self.location_on_land()
         self.os_name = self.select('operating_systems')
         self.browser_name = self.select('browsers')
+        self.interested_genre = self.select('interested_genre')
         self.device_is_mobile = False
         self.device_type = 'Computer'
         self.ad = self.select('ads')
@@ -98,7 +99,8 @@ class User(Faker, WeightedRandom):
         """
         return dict(
             user_custom_id=self.ascii_free_email(),
-            user_domain_id=str(self.uuid4())
+            user_domain_id=str(self.uuid4()),
+            user_genre=self.interested_genre
         )
 
     def referer(self) -> dict:

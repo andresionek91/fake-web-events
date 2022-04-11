@@ -1,18 +1,18 @@
 pages:
   home:
      home: 0.45
-     product_a: 0.17
-     product_b: 0.12
+     brooklyn_99: 0.17
+     law_order: 0.12
      session_end: 0.26
 
-  product_a:
-     product_a: 0.5
+  brooklyn_99:
+     brooklyn_99: 0.5
      home: 0.18
      cart: 0.12
      session_end: 0.2
 
-  product_b:
-     product_b: 0.4
+  law_order:
+     law_order: 0.4
      home: 0.22
      cart: 0.14
      session_end: 0.24
@@ -35,8 +35,8 @@ pages:
 
 landing_pages:
   home: 0.6
-  product_a: 0.25
-  product_b: 0.15
+  brooklyn_99: 0.25
+  law_order: 0.15
 
 visits_per_hour:
   0: 0.0273
@@ -89,6 +89,19 @@ campaigns:
   campaign_1: 0.8
   campaign_2: 0.2
 
+interested_genre:
+  comedy: 0.18
+  horror: 0.14
+  family: 0.16
+  romance: 0.19
+  action: 0.12
+  mystery: 0.11
+  kids: .09
+
+definition: 
+  hd: .73
+  sd: .27
+
 utm_mediums:
   cpc: 0.25
   affiliate: 0.1
@@ -101,3 +114,56 @@ browsers:
   InternetExplorer: 0.05
   Safari: 0.1
   Opera: 0.1
+
+
+seconds_buffered: 
+  0: 0.0273
+  1: 0.0185
+  2: 0.0108
+  3: 0.0107
+  4: 0.0050
+  5: 0.0105
+  6: 0.0192
+  7: 0.0297
+  8: 0.0382
+  9: 0.0426
+  10: 0.0549
+  11: 0.0583
+  12: 0.0646
+  13: 0.0627
+  14: 0.0572
+  15: 0.0521
+  16: 0.0590
+  17: 0.0667
+  18: 0.0718
+  19: 0.0662
+  20: 0.0696
+  21: 0.0428
+  22: 0.0329
+  23: 0.0287
+
+minutes_watched: 
+  0: 0.0273
+  1: 0.0185
+  2: 0.0108
+  3: 0.0107
+  4: 0.0050
+  5: 0.0105
+  6: 0.0192
+  7: 0.0297
+  8: 0.0382
+  9: 0.0426
+  10: 0.0549
+  11: 0.0583
+  12: 0.0646
+  13: 0.0627
+  14: 0.0572
+  15: 0.0521
+  16: 0.0590
+  17: 0.0667
+  18: 0.0718
+  19: 0.0662
+  20: 0.0696
+  21: 0.0428
+  22: 0.0329
+  23: 0.0287

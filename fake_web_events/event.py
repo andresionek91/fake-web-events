@@ -15,6 +15,9 @@ class Event(Faker, WeightedRandom):
         super().__init__(['en_US'])
         self.previous_page = None
         self.current_page = self.select('landing_pages')
+        self.definition = self.select('definition')
+        self.minutes_watched = self.select('minutes_watched')
+        self.seconds_buffered = self.select('seconds_buffered')
         self.user = user
         self.batch_size = batch_size
         self.current_timestamp = self.randomize_timestamp(current_timestamp)
@@ -45,8 +48,11 @@ class Event(Faker, WeightedRandom):
             'event_id': self.uuid4(),
             'event_timestamp': self.current_timestamp.strftime('%Y-%m-%d %H:%M:%S.%f'),
             'event_type': 'pageview',
-            'page_url': f'http://www.dummywebsite.com/{self.current_page}',
+            'page_url': f'http://www.webflix.com/{self.current_page}',
             'page_url_path': f'/{self.current_page}',
+            'page_definition': self.definition, 
+            'seconds_buffered': self.seconds_buffered, 
+            'minutes_watched': self.minutes_watched
         }
 
     def asdict(self) -> dict:
